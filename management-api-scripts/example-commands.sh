@@ -22,4 +22,4 @@ python run_report_history_downloader.py --global_config_yaml resources/tekenrada
 
 # Download responses
 python run_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key default --survey_info_lang nl --survey_info_format json --response_format wide --short_keys --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-02-01-00-00-00 --survey_key PDiff
-
+python run_batch_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --query resources/tekenradar/study/response_query.yaml
