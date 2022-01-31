@@ -10,6 +10,10 @@ python run_update_study_rules.py --global_config_yaml resources/tekenradar/confi
 # Save survey
 python run_save_survey.py --global_config_yaml resources/tekenradar/config.yaml --study_key default --survey_json resources/tekenradar/study/surveys/PDiff.json
 
+# Batch save survey
+python run_batch_save_surveys.py --global_config_yaml resources/tekenradar/config.yaml --study_key default --survey_list resources/tekenradar/study/survey_list.txt
+
+
 # Download participant states and reports
 python run_participant_state_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key default
 python run_participant_state_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key default --status active
