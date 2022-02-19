@@ -288,6 +288,19 @@ class ManagementAPIClient:
             return None
         return r.json()
 
+    def get_confidential_responses(self, study_key: str, query):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        url = "{}/v1/data/{}/fetch-confidential-responses".format(
+                self.management_api_url,
+                study_key,
+            )
+        r = requests.post(url, headers=self.auth_header, data=json.dumps(query))
+        if r.status_code != 200:
+            print(r.content)
+            return None
+        return r.json()
+
     def get_response_statistics(self, study_key, start=None, end=None):
         if self.auth_header is None:
             raise ValueError('need to login first')
