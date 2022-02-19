@@ -143,6 +143,19 @@ class ManagementAPIClient:
         if r.status_code != 200:
             raise ValueError(r.content)
         return r.json()
+
+    def run_custom_study_rules_for_single_participant(self, study_key, rules, participantID: str):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        r = requests.post(self.management_api_url + '/v1/study/' + study_key + '/run-rules-for-single-participant', headers=self.auth_header,
+                          data=json.dumps({
+                              'studyKey': study_key,
+                              'rules': rules,
+                              'participantId': participantID,
+                          }))
+        if r.status_code != 200:
+            raise ValueError(r.content)
+        return r.json()
         # print('study rules updated succcessfully')
 
     def delete_study(self, study_key):
