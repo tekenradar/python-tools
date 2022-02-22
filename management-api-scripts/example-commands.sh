@@ -21,9 +21,23 @@ python run_report_history_downloader.py --global_config_yaml resources/tekenrada
 python run_report_history_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --report_key test1 --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-02-01-00-00-00 --participant_id <id-of-a-participant>
 
 # Download responses
-python run_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --survey_info_lang nl --survey_info_format json --response_format wide --short_keys --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-02-01-00-00-00 --survey_key PDiff
+python run_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --survey_info_lang nl --survey_info_format json --response_format wide --short_keys --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-03-01-00-00-00 --survey_key PDiff
 python run_batch_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --query resources/tekenradar/study/response_query.yaml
 
 ### Commands for testing
 # Change timing of follow ups to now
 python3 run_custom_study_rules.py --global_config_yaml resources/tekenradar/config.yaml --rules_json_path ../../tekenradar-studies/output/tekenradar/customRules/changeFollowupTimingToNow.json --study_key tekenradar
+
+
+### Email Uploading
+# Upload common/required email templates:
+python run_messaging_upload_common_templates.py --global_config_yaml resources/tekenradar/config.yaml --default_language nl --email_template_folder resources/tekenradar/emails/general-templates
+
+# Upload one custom email template:
+python run_messaging_upload_custom_template.py --global_config_yaml resources/tekenradar/config.yaml --email_template_folder resources/tekenradar/emails/custom-templates/testmessage1
+
+# Manage auto email schedules:
+# TODO
+
+# Send one message to study participants based using study rule as condition:
+# TODO
