@@ -41,7 +41,7 @@ python run_messaging_upload_common_templates.py --global_config_yaml resources/t
 python run_messaging_upload_custom_template.py --global_config_yaml resources/tekenradar/config.yaml --email_template_folder resources/tekenradar/emails/custom-templates/testmessage1
 
 # Manage auto email schedules:
-# TODO
+python run_messaging_schedule_editor.py --global_config_yaml resources/tekenradar/config.yaml --email_folder resources/tekenradar/emails/message-schedules/participant-message
 
 # Send one message to study participants based using study rule as condition:
 # TODO
