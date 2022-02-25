@@ -39,6 +39,7 @@ python run_messaging_upload_common_templates.py --global_config_yaml resources/t
 
 # Upload one custom email template:
 python run_messaging_upload_custom_template.py --global_config_yaml resources/tekenradar/config.yaml --email_template_folder resources/tekenradar/emails/custom-templates/testmessage1
+python run_batch_upload_custom_templates.py --global_config_yaml resources/tekenradar/config.yaml --folder_with_all_templates resources/tekenradar/emails/custom-templates
 
 # Manage auto email schedules:
 python run_messaging_schedule_editor.py --global_config_yaml resources/tekenradar/config.yaml --email_folder resources/tekenradar/emails/message-schedules/participant-message
