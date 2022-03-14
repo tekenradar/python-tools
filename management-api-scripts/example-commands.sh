@@ -50,4 +50,5 @@ python run_messaging_schedule_editor.py --global_config_yaml resources/tekenrada
 
 
 # Invite users / Migrate users from old system
+python prepare_user_migration_files.py --input Invitees2.csv
 python run_invite_users.py --global_config_yaml resources/tekenradar/config.yaml  --user_list resources/tekenradar/inviteUsers.json --sleep 2.5
