@@ -7,6 +7,9 @@ python run_create_study.py --global_config_yaml resources/tekenradar/config.yaml
 # Update study rules:
 python run_update_study_rules.py --global_config_yaml resources/tekenradar/config.yaml --rules_json_path resources/tekenradar/study/study_rules.json --study_key tekenradar
 
+# Manage study members
+python run_manage_study_members.py --study_key tekenradar --user_id <userId> --user_name <userName> --action <ADD or REMOVE>
+
 # Save survey
 python run_save_survey.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --survey_json resources/tekenradar/study/surveys/PDiff.json
 
