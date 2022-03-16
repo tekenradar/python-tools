@@ -30,6 +30,10 @@ python run_batch_response_downloader.py --global_config_yaml resources/tekenrada
 ## Confidential response downloader
 python run_confidential_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --condition_path resources/tekenradar/study/confidentialResponseDonwloadCondition.json --participants_list resources/tekenradar/study/participants.txt
 
+## Download file infos/files
+python run_download_file_infos.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-04-01-00-00-00
+python run_download_files.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-04-01-00-00-00
+
 
 ### Commands for testing
 # Change timing of follow ups to now
