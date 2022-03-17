@@ -67,7 +67,7 @@ class ManagementAPIClient:
         resp = r.json()
         if 'secondFactorNeeded' in resp.keys() and resp['secondFactorNeeded']:
             verification_code = input('Enter verification code:')
-            credentials['verificationCode'] = verification_code
+            credentials['verificationCode'] = verification_code.replace('-', '').replace(' ', '').strip()
             r = requests.post(
                 self.management_api_url + '/v1/auth/login-with-email', data=json.dumps(credentials))
             if r.status_code != 200:
