@@ -120,6 +120,27 @@ class ManagementAPIClient:
             raise ValueError(r.content)
         print('study props updated succcessfully')
 
+    def get_study_notification_subs(self, study_key):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        r = requests.get(self.management_api_url + '/v1/study/' + study_key + '/notification-subscriptions', headers=self.auth_header)
+        if r.status_code != 200:
+            raise ValueError(r.content)
+        return r.json()
+
+    def update_study_notification_subs(self, study_key, subscritions):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        r = requests.post(self.management_api_url + '/v1/study/' + study_key + '/notification-subscriptions', headers=self.auth_header,
+                          data=json.dumps({
+                              'subscriptions': subscritions
+                          }))
+        if r.status_code != 200:
+            raise ValueError(r.content)
+        print('study notification subscriptions updated succcessfully')
+        return r.json()
+
+
     def update_study_rules(self, study_key, rules):
         if self.auth_header is None:
             raise ValueError('need to login first')
