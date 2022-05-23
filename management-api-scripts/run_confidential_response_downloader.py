@@ -4,6 +4,7 @@ import argparse
 from management_api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 from datetime import datetime
+import pandas as pd
 
 
 def get_email(item):
@@ -89,7 +90,9 @@ def parse_confidential_data(data):
         pid = r["participantId"]
 
         if pid not in responses.keys():
-            responses[pid] = {}
+            responses[pid] = {
+                "participantID": pid
+            }
 
         current_participant = responses[pid]
 
@@ -116,26 +119,12 @@ def parse_confidential_data(data):
 
 
 def save_as_csv(filename, data):
-    keys = ["participantID", "email", "firstname", "lastname", "gender", "phone", "gp_office", "gp_name", "gp_address_street", "gp_address_number", "gp_address_postalcode", "gp_address_city", "gp_phone"]
-    with open(filename, 'w') as f:
-        line = ",".join(keys)
-        line += '\n'
-        f.write(line)
-
-        for pID in data.keys():
-            lineInfos = []
-            lineInfos.append(pID)
-            pData = data[pID]
-            for i in range(1, len(keys)):
-                k = keys[i]
-                if k not in pData.keys():
-                    lineInfos.append('')
-                else:
-                    lineInfos.append(pData[k])
-
-            line = ",".join(lineInfos)
-            line += '\n'
-            f.write(line)
+    # column_names = ["participantID", "email", "firstname", "lastname", "gender", "phone", "gp_office", "gp_name", "gp_address_street", "gp_address_number", "gp_address_postalcode", "gp_address_city", "gp_phone"]
+    df = []
+    for pID in data.keys():
+        df.append(data[pID])
+    df = pd.DataFrame(df)
+    df.to_csv(filename, index=False)
 
 
 if __name__ == "__main__":
