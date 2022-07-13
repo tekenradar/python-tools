@@ -18,12 +18,13 @@ if __name__ == "__main__":
 
     with open(csv_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-        try:
-            codes = [ line.strip().split(',')[1].replace('"', "") for line in lines[1:]]
-        except:
-            print('could not parse csv file')
-            print(lines)
-            exit()
+
+        codes = []
+        for line in lines[1:]:
+            items = line.strip().split(',')
+            if len(items) < 2:
+                continue
+            codes.append(items[1].replace('"', ""))
 
         index = 0
         step_size = 200
