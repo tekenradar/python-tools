@@ -16,9 +16,14 @@ if __name__ == "__main__":
     upload_url = args.upload_url
     api_key = args.api_key
 
-    with open(csv_path) as f:
+    with open(csv_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-        codes = [ line.strip().split(',')[1].replace('"', "") for line in lines[1:]]
+        try:
+            codes = [ line.strip().split(',')[1].replace('"', "") for line in lines[1:]]
+        except:
+            print('could not parse csv file')
+            print(lines)
+            exit()
 
         index = 0
         step_size = 200
