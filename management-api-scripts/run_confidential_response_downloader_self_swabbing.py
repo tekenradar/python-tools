@@ -108,18 +108,26 @@ if __name__ == "__main__":
     parser.add_argument(
         "--global_config_yaml", help="global configuration file path", default=os.path.join('resources', 'config.yaml'))
     parser.add_argument("--study_key", type=str, required=True)
-    parser.add_argument("--condition_path", type=str, required=True)
     parser.add_argument("--participants_list", type=str, required=True)
-    parser.add_argument("--key_filter", type=str, default='')
 
     args = parser.parse_args()
 
     study_key = args.study_key
-    key_filter = args.key_filter
-    condition_path = args.condition_path
     p = args.participants_list
 
-    condition = json.load(open(condition_path, 'r', encoding='UTF-8'))
+    condition = {
+        "name": "gt",
+        "data": [
+            {
+                "dtype": "num",
+                "num": 1
+            },
+            {
+                "dtype": "num",
+                "num": 0
+            }
+        ]
+    }
 
     participants = [l.strip() for l in open(p, 'r', encoding='UTF-8').readlines()]
 
@@ -134,7 +142,7 @@ if __name__ == "__main__":
 
     query = {
         "participantIds": participants,
-        "keyFilter": key_filter,
+        "keyFilter": '',
         "condition": condition
     }
 
