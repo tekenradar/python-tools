@@ -35,6 +35,9 @@ if __name__ == "__main__":
     rules = json.load(open(rules_path, 'r', encoding='UTF-8'))
 
     for pid in participants:
+        if len(pid) < 4:
+            print("unexpected participant ID: {}".format(pid))
+            continue
         resp = client.run_custom_study_rules_for_single_participant(study_key, rules, pid)
         print('Applying for participant: {}'.format(pid))
         if 'participantStateChangePerRule' in resp.keys():
