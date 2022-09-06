@@ -140,20 +140,34 @@ if __name__ == "__main__":
     client = ManagementAPIClient(
         management_api_url, user_credentials, use_external_idp=use_external_idp)
 
-    query = {
-        "participantIds": participants,
-        "keyFilter": '',
-        "condition": condition
+
+    responses = []
+    index = 0
+    batch_size = 20
+    while index < len(participants):
+        current_participants = participants[index: min(index + batch_size, len(participants))]
+        index = index + batch_size
+
+        query = {
+            "participantIds": current_participants,
+            "keyFilter": '',
+            "condition": condition
+        }
+        resp = client.get_confidential_responses(
+            study_key,
+            query
+        )
+        if resp is None:
+            print("No responses found in this batch.")
+            continue
+        try:
+            responses.extend(resp['responses'])
+        except:
+            continue
+
+    resp = {
+        "responses": responses
     }
-
-    resp = client.get_confidential_responses(
-        study_key,
-        query
-    )
-    if resp is None:
-        print("No files were generated.")
-        exit()
-
     output_folder = "downloads"
     os.makedirs(output_folder, exist_ok=True)
     filename = "confidential_responses_{}_{}.json".format(study_key, datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
