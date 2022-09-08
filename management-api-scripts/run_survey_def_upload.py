@@ -51,4 +51,7 @@ if __name__ == "__main__":
     survey_key = survey_def['survey']['current']['surveyDefinition']['key']
     survey_def['studyKey'] = study_key
 
+    if "id" in survey_def["survey"].keys():
+        del survey_def["survey"]["id"]
+
     client.save_survey_to_study(study_key, survey_def)
