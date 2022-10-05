@@ -120,6 +120,9 @@ def parse_confidential_data(data):
 
 def save_as_csv(filename, data):
     # column_names = ["participantID", "email", "firstname", "lastname", "gender", "phone", "gp_office", "gp_name", "gp_address_street", "gp_address_number", "gp_address_postalcode", "gp_address_city", "gp_phone"]
+    if data is None:
+        print('No CSV generated. Reason: no data found.')
+        return
     df = []
     for pID in data.keys():
         df.append(data[pID])
