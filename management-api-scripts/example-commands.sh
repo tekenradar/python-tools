@@ -44,6 +44,8 @@ python run_download_files.py --global_config_yaml resources/tekenradar/config.ya
 python3 run_custom_study_rules.py --global_config_yaml resources/tekenradar/config.yaml --rules_json_path ../../tekenradar-studies/output/tekenradar/customRules/changeFollowupTimingToNow.json --study_key tekenradar
 python3 run_custom_study_rules_for_participants.py --global_config_yaml resources/tekenradar/config.yaml --rules_json_path ../../tekenradar-studies/output/tekenradar/customRules/changeFollowupTimingToNow.json --study_key tekenradar  --participants_ids resources/tekenradar/study/participants.txt
 
+#delete old contact data (zonder 3!!!)
+python run_custom_study_rules.py --global_config_yaml resources/tekenradar/config.yaml --rules_json_path ../../tekenradar-studies/output/tekenradar/customRules/assignDeleteContactDataSurvey.json --study_key tekenradar
 
 ### Email Uploading
 # Upload common/required email templates:
