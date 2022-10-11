@@ -67,3 +67,7 @@ python run_messaging_schedule_editor.py --global_config_yaml resources/tekenrada
 # Invite users / Migrate users from old system
 python prepare_user_migration_files.py --input Invitees2.csv
 python run_invite_users.py --global_config_yaml resources/tekenradar/config.yaml  --user_list resources/tekenradar/inviteUsers.json --sleep 2.5
+
+
+# Longcovid study invite example:
+python run_invite_to_external_study_rules.py --global_config_yaml resources/infectieradar/config.yaml --study_key longcovid --participants resources/infectieradar/participants_to_invite.csv
