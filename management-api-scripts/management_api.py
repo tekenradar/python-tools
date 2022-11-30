@@ -225,8 +225,13 @@ class ManagementAPIClient:
     def save_survey_to_study(self, study_key, survey_object):
         if self.auth_header is None:
             raise ValueError('need to login first')
+
+        upload_obj = {
+            "studyKey": study_key,
+            "survey": survey_object
+        }
         r = requests.post(self.management_api_url + '/v1/study/' + study_key +
-                          '/surveys', headers=self.auth_header, data=json.dumps(survey_object))
+                          '/surveys', headers=self.auth_header, data=json.dumps(upload_obj))
         if r.status_code != 200:
             raise ValueError(r.content)
         print('survey saved succcessfully')
@@ -240,13 +245,13 @@ class ManagementAPIClient:
             raise ValueError(r.content)
         return r.json()
 
-    def get_survey_definition(self, study_key, survey_key):
+    def get_survey_definition(self, study_key, survey_key, version_id=''):
         if self.auth_header is None:
             raise ValueError('need to login first')
         if self.auth_header is None:
             raise ValueError('need to login first')
         r = requests.get(
-            self.management_api_url + '/v1/study/' + study_key + '/survey/' + survey_key,
+            self.management_api_url + '/v1/study/' + study_key + '/survey/' + survey_key + '/' + version_id,
             headers={'Authorization': 'Bearer ' + self.token})
         if r.status_code != 200:
             if json.loads(r.content.decode())["error"] == "mongo: no documents in result":
@@ -256,11 +261,54 @@ class ManagementAPIClient:
             return None
         return r.json()
 
-    def remove_survey_from_study(self, study_key, survey_key):
+    def get_survey_keys(self, study_key):
         if self.auth_header is None:
             raise ValueError('need to login first')
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        r = requests.get(
+            self.management_api_url + '/v1/study/' + study_key + '/survey-keys',
+            headers={'Authorization': 'Bearer ' + self.token})
+        if r.status_code != 200:
+            if json.loads(r.content.decode())["error"] == "mongo: no documents in result":
+                print('Survey keys does not exist in this study yet.')
+            else:
+                print(r.content)
+            return None
+        return r.json()
+
+    def get_survey_history(self, study_key, survey_key):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        url = '{}/v1/study/{}/survey/{}/versions'.format(self.management_api_url, study_key, survey_key)
+        r = requests.get(url, headers={'Authorization': 'Bearer ' + self.token})
+        if r.status_code != 200:
+            if json.loads(r.content.decode())["error"] == "mongo: no documents in result":
+                print('Survey does not exist in this study yet.')
+            else:
+                print(r.content)
+            return None
+        return r.json()
+
+    def unpublish_survey(self, study_key, survey_key):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        url = '{}/v1/study/{}/survey/{}'.format(self.management_api_url, study_key, survey_key)
         r = requests.delete(
-            self.management_api_url + '/v1/study/' + study_key + '/survey/' + survey_key,
+            url,
+            headers={'Authorization': 'Bearer ' + self.token})
+        if r.status_code != 200:
+            raise ValueError(r.content)
+        print("survey successfully unpublished")
+
+    def remove_survey_version(self, study_key, survey_key, version_id):
+        if self.auth_header is None:
+            raise ValueError('need to login first')
+        url = '{}/v1/study/{}/survey/{}/{}'.format(self.management_api_url, study_key, survey_key, version_id)
+        r = requests.delete(
+            url,
             headers={'Authorization': 'Bearer ' + self.token})
         if r.status_code != 200:
             raise ValueError(r.content)

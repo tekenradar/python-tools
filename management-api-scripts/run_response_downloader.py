@@ -30,8 +30,6 @@ if __name__ == "__main__":
                         dest='meta_resp', action='store_true')
     parser.add_argument("--with_meta_display_times",
                         dest='meta_disp', action='store_true')
-    parser.add_argument("--with_meta_item_versions",
-                        dest='meta_version', action='store_true')
     args = parser.parse_args()
 
     study_key = args.study_key
@@ -44,7 +42,6 @@ if __name__ == "__main__":
 
     with_meta_infos = {
         "withPositions": "true" if args.meta_pos else "false",
-        "withItemVersions": "true" if args.meta_version else "false",
         "withInitTimes": "true" if args.meta_init else "false",
         "withDisplayTimes": "true" if args.meta_disp else "false",
         "withResponseTimes": "true" if args.meta_resp else "false",

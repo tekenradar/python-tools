@@ -48,7 +48,7 @@ if __name__ == "__main__":
         "survey": survey_def
     }
 
-    survey_key = survey_def['survey']['current']['surveyDefinition']['key']
+    survey_key = survey_def['surveyDefinition']['key']
     survey_def['studyKey'] = study_key
 
     if "id" in survey_def["survey"].keys():
