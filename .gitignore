@@ -5,3 +5,4 @@ venv
 **/resources
 **/downloads
 **/export_*
+.DS_Store

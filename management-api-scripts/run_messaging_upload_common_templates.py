@@ -89,6 +89,11 @@ if __name__ == "__main__":
                     "templateDef": read_and_endcode_template(translated_template)
                 }
             )
+        try: 
+            r = client.save_email_template(template_def)
+        except ValueError as e:
+            print('template for ' + m_type + ' cannot be saved:')
+            print(e)
+        else:
+            print('saved templates for: ' + m_type)
 
-        r = client.save_email_template(template_def)
-        print('saved templates for: ' + m_type)
