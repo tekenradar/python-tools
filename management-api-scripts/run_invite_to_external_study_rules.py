@@ -1,7 +1,7 @@
 import os
 import argparse
 import pandas as pd
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 
 

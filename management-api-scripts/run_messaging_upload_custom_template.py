@@ -1,8 +1,7 @@
 import argparse
 import os
 import base64
-import yaml
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 
 
@@ -51,7 +50,7 @@ if __name__ == "__main__":
         current_translation["templateDef"] = read_and_endcode_template(os.path.join(email_template_folder, code + '.html'))
         payload["translations"].append(current_translation)
 
-    try: 
+    try:
         r = client.save_email_template(payload)
     except Exception as e:
         print('template for ' + email_config["messageType"] + ' cannot be saved:')

@@ -5,7 +5,7 @@ import random
 import string
 from time import sleep
 
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 
 
