@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 import base64
 from datetime import datetime

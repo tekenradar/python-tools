@@ -2,7 +2,7 @@ import os
 import json
 import argparse
 from datetime import datetime
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml, should_use_external_idp
 
 
@@ -36,25 +36,5 @@ if __name__ == "__main__":
 
     survey_def = read_survey_json(survey_path)
 
-    survey_key = survey_def['survey']['current']['surveyDefinition']['key']
-    survey_def['studyKey'] = study_key
-    survey_def['survey']['current']['published'] = int(
-        datetime.now().timestamp())
+    resp = client.save_survey_to_study(study_key, survey_def)
 
-    existing_survey_def = client.get_survey_definition(study_key, survey_key)
-
-    if existing_survey_def is None:
-        print('Creating new survey entry for this study.')
-        client.save_survey_to_study(study_key, survey_def)
-    else:
-        history = []
-        if 'history' in existing_survey_def.keys():
-            history = existing_survey_def['history']
-
-        existing_survey_def['current']['unpublished'] = int(
-            datetime.now().timestamp())
-        history.append(
-            existing_survey_def['current']
-        )
-        survey_def['survey']['history'] = history
-        client.save_survey_to_study(study_key, survey_def)

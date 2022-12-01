@@ -1,6 +1,6 @@
 import os
 import argparse
-from management_api import ManagementAPIClient
+from influenzanet.api import ManagementAPIClient
 from utils import read_yaml
 
 
