@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     for survey_path in surveys:
         survey_def = read_survey_json(survey_path)
-        survey_key = survey_def['survey']['surveyDefinition']['key']
+        survey_key = survey_def['surveyDefinition']['key']
         try:
             resp = client.save_survey_to_study(study_key, survey_def)
             print("Survey '{}' saved.".format(survey_key))
