@@ -59,6 +59,7 @@ python run_batch_upload_custom_templates.py --global_config_yaml resources/teken
 python run_messaging_schedule_editor.py --global_config_yaml resources/tekenradar/config.yaml --email_folder resources/tekenradar/emails/message-schedules/participant-message
 python run_messaging_schedule_editor.py --global_config_yaml resources/tekenradar/config.yaml --email_folder resources/tekenradar/emails/message-schedules/reminder-for-weeklyTB
 python run_messaging_schedule_editor.py --global_config_yaml resources/tekenradar/config.yaml --email_folder resources/tekenradar/emails/message-schedules/researcher-notification
+python run_messaging_delete_schedule.py --global_config_yaml resources/tekenradar/config.yaml
 
 # Send one message to study participants based using study rule as condition:
 # TODO
