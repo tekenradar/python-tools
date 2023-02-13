@@ -50,7 +50,7 @@ if __name__ == "__main__":
                 ref, c_ind = l.split(',')
                 p_info = {
                     "reference": ref,
-                    "childIndex": int(c_ind)
+                    "childIndex": int(c_ind) - 1
                 }
                 invites["participants"].append(p_info)
 
