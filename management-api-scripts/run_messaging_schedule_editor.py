@@ -48,7 +48,7 @@ if __name__ == "__main__":
         "label": email_config["label"],
         "nextTime": int(nextTime.timestamp()),
         "period": email_config["period"],
-        "until": email_config["until"],
+        "until":  email_config["until"] if "until" in email_config.keys() else 0,
         "condition": email_config["condition"],
         "template": {
             "headerOverrides": headerOverrides,
