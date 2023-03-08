@@ -54,15 +54,30 @@ if __name__ == "__main__":
                 }
                 invites["participants"].append(p_info)
 
+    batch_size = 5
 
-    r = requests.post(
-            api + '/igasonderzoek/invite', data=json.dumps(invites),
+    print(len(invites["participants"]))
+    batch_count = -(len(invites["participants"]) // -batch_size)
+    print('Total batches: {}'.format(batch_count))
+
+    current_batch = 0
+    total_sent = 0
+    for i in range(0, len(invites["participants"]), batch_size):
+        batch = invites["participants"][i:i+batch_size]
+        current_batch += 1
+        r = requests.post(
+            api + '/igasonderzoek/invite', data=json.dumps({"participants": batch}),
             headers=client.auth_header)
-    if r.status_code != 200:
-        raise ValueError(r.content)
-    try:
-        print('{} messages sent / id count: {}'.format(r.json()['count'], len(invites["participants"])))
-    except Exception as e:
-        print(e)
+        if r.status_code != 200:
+            raise ValueError(r.content)
+        try:
+            total_sent += r.json()['count']
+            print('Batch #{}: {} messages sent / id count: {}'.format(current_batch, r.json()['count'], len(batch)))
+        except Exception as e:
+            print(e)
+        if current_batch > 0 and current_batch % 3 == 0:
+            client.renew_token()
+
+    print('Total sent: {}'.format(total_sent))
 
 
