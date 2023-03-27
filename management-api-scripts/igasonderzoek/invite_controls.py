@@ -75,7 +75,7 @@ if __name__ == "__main__":
             print('Batch #{}: {} messages sent / id count: {}'.format(current_batch, r.json()['count'], len(batch)))
         except Exception as e:
             print(e)
-        if current_batch > 0 and current_batch % 3 == 0:
+        if current_batch > 0 and current_batch % 50 == 0:
             client.renew_token()
 
     print('Total sent: {}'.format(total_sent))
