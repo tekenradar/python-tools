@@ -10,10 +10,22 @@ from utils import read_yaml, should_use_external_idp
 
 
 def get_random_password_string(length):
-    password_characters = string.ascii_letters + string.digits + string.punctuation
-    password = ''.join(random.choice(password_characters)
-                       for i in range(length))
-    return password
+    numbers = string.digits
+    lowercase = string.ascii_lowercase
+    uppercase = string.ascii_uppercase
+    symbols = string.punctuation
+
+    password = [
+        random.choice(numbers),
+        random.choice(lowercase),
+        random.choice(uppercase),
+        random.choice(symbols)
+    ]
+
+    password += random.choices(numbers + lowercase + uppercase + symbols, k=length)
+
+    random.shuffle(password)
+    return ''.join(password)
 
 
 def log_migration_events(type, users_impacted, log_file_path):
