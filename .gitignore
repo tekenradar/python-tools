@@ -6,3 +6,5 @@ venv
 **/downloads
 **/export_*
 .DS_Store
+management-api-scripts/run_messaging_upload_empty_translation.py
+management-api-scripts/unpublish_survey.py
