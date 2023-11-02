@@ -31,6 +31,9 @@ python run_report_history_downloader.py --global_config_yaml resources/tekenrada
 python run_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --survey_info_lang nl --survey_info_format json --response_format wide --short_keys --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-04-01-00-00-00 --survey_key TBflow_Adults
 python run_batch_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --query resources/tekenradar/study/response_query.yaml
 
+# Download responses with pagination
+python run_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --survey_info_lang nl --survey_info_format json --response_format wide --short_keys --query_start_date 2022-01-01-00-00-00 --query_end_date 2022-04-01-00-00-00 --survey_key PDiff --page_size 10 --page 1
+
 ## Confidential response downloader
 python run_confidential_response_downloader.py --global_config_yaml resources/tekenradar/config.yaml --study_key tekenradar --condition_path resources/tekenradar/study/confidentialResponseDonwloadCondition.json --participants_list resources/tekenradar/study/participants.txt
 
