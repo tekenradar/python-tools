@@ -29,6 +29,8 @@ if __name__ == "__main__":
                         dest='meta_resp', action='store_true')
     parser.add_argument("--with_meta_display_times",
                         dest='meta_disp', action='store_true')
+    parser.add_argument("--page_size", default=None)
+    parser.add_argument("--page", default=None)
     args = parser.parse_args()
 
     study_key = args.study_key
@@ -38,6 +40,8 @@ if __name__ == "__main__":
     response_format = args.response_format
     short_keys = args.short_keys
     key_separator = args.key_separator
+    page_size = args.page_size
+    page = args.page
 
     with_meta_infos = {
         "withPositions": "true" if args.meta_pos else "false",
@@ -71,7 +75,8 @@ if __name__ == "__main__":
         response_format,
         short_keys,
         with_meta_infos,
-        query_start_date, query_end_date
+        query_start_date, query_end_date, 
+        page_size, page,
     )
     if resp is None:
         print("No files were generated.")
