@@ -14,7 +14,9 @@ message_types = [
     'password-reset',
     'password-changed',
     'account-id-changed',  # email address changed
-    'account-deleted'
+    'account-deleted',
+    'account-deleted-after-inactivity',
+    'account-inactivity'
 ]
 
 
