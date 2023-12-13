@@ -37,4 +37,5 @@ if __name__ == "__main__":
     survey_def = read_survey_json(survey_path)
 
     resp = client.save_survey_to_study(study_key, survey_def)
+    print('survey saved succcessfully')
 
