@@ -14,6 +14,7 @@ if __name__ == "__main__":
     parser.add_argument("--query_start_date", default=None)
     parser.add_argument("--query_end_date", default=None)
     parser.add_argument("--participant_id", default=None)
+    parser.add_argument("--as_csv", action="store_true", default=False)
 
     args = parser.parse_args()
 
@@ -52,8 +53,31 @@ if __name__ == "__main__":
 
     output_folder = "downloads"
     os.makedirs(output_folder, exist_ok=True)
-    filename = "reports_{}_{}.json".format(study_key, datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
-    output_path = os.path.join(output_folder, filename)
-    with open(output_path, 'w') as f:
-        json.dump(resp, f)
+
+    if args.as_csv:
+        print("Converting to CSV")
+        import pandas as pd
+        import json
+        flat_resp = []
+
+        for report in resp["reports"]:
+            flat_report = {}
+            for k, v in report.items():
+                if k != "data":
+                    flat_report[k] = v
+                else:
+                    for entry in report["data"]:
+                        flat_report[entry["key"]] = entry["value"]
+            flat_resp.append(flat_report)
+        df = pd.DataFrame(flat_resp)
+        filename = "reports_{}_{}.csv".format(study_key, datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        output_path = os.path.join(output_folder, filename)
+        df.to_csv(output_path, index=False)
         print('Saved file at {}'.format(output_path))
+        exit()
+    else:
+        filename = "reports_{}_{}.json".format(study_key, datetime.now().strftime("%Y-%m-%d-%H-%M-%S"))
+        output_path = os.path.join(output_folder, filename)
+        with open(output_path, 'w') as f:
+            json.dump(resp, f)
+            print('Saved file at {}'.format(output_path))
