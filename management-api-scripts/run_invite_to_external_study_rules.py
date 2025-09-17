@@ -80,6 +80,11 @@ if __name__ == "__main__":
         print('Applying for participant: {}'.format(pid))
         if 'participantStateChangePerRule' in resp.keys():
             for i, c in enumerate(resp['participantStateChangePerRule']):
+                pCount = 0
+                if 'participantCount' in resp.keys():
+                    pCount = resp['participantCount']
+                else:
+                    print("participantCount not found in response")
                 print('\tRule #{}: changed {} of {} participants'.format(
-                    i+1, c, resp['participantCount']))
+                    i+1, c, pCount))
     print("Ready with all participants.")
